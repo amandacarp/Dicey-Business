@@ -1,5 +1,4 @@
 let diceList = [];
-let diceIndex = 0;
 let dieSum = 0;
 
 class Die{
@@ -7,17 +6,20 @@ class Die{
         this.div = $('<div</div>');
         this.div.appendTo('.dieContainer')
         this.value = this.roll();
-        this.divProperties();  
-        this.index = diceIndex
-        diceIndex++ 
+        this.divProperties(); 
         $(this.div).click(() => {
             this.value = this.roll();
+            this.div.text(this.value)
+        })
+        $(this.div).dblclick(() => {
+            this.div.remove(); 
+            let diceIndex = diceList.indexOf(this)
+            diceList.splice(diceIndex, 1)
         })
     }
 
     divProperties(){
         this.div.attr('class', 'square')
-        this.div.attr('id', diceIndex);
         this.div.text(this.value);  
           
     }
@@ -35,7 +37,8 @@ $('#addDieBtn').click(() => {
 
 $('#rollNew').click(() => {
     for (let i = 0; i < diceList.length; i++) {
-        diceList[i].value = Die.roll;
+        diceList[i].value = diceList[i].roll();
+       diceList[i].div.text(diceList[i].value);
     }
 });
 
@@ -44,4 +47,5 @@ $('#sumDie').click(() => {
         dieSum += diceList[i].value
     }
     alert(dieSum);
+    dieSum = 0; 
 });
