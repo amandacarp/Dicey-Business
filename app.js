@@ -5,7 +5,7 @@ let dieSum = 0;
 class Die{
     constructor(){ 
         this.div = $('<div</div>');
-        this.div.appendTo('body')
+        this.div.appendTo('.dieContainer')
         this.value = this.roll();
         this.divProperties();  
         this.index = diceIndex
@@ -35,7 +35,7 @@ $('#addDieBtn').click(() => {
 
 $('#rollNew').click(() => {
     for (let i = 0; i < diceList.length; i++) {
-        diceList[i].value = Die.roll();
+        diceList[i].value = Die.roll;
     }
 });
 
